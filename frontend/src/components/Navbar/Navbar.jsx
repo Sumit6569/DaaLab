@@ -40,8 +40,7 @@ function Navbar() {
   return (
     <nav className="navbar sticky-top">
       <div className="nav-container">
-
-        <a className="img" href="/" >
+        <a className="img" href="/">
           <img src="/logo.png" alt="Logo" width="130px" height="70px" />
         </a>
 
@@ -53,7 +52,7 @@ function Navbar() {
         {/* Navigation Links */}
         <div className={`navbar-nav ${isNavOpen ? "active" : ""}`}>
           <div className="nav-comp">
-          <div
+            <div
               className={`nav-link dropdown ${isDropdownOpen ? "open" : ""}`}
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
@@ -67,29 +66,47 @@ function Navbar() {
                 </div>
               )}
             </div>
-            
+
             <a className="nav-link" href="/">
               Home
             </a>
 
-            <a className="nav-link" href="/about"> About Us </a>
-            <a className="nav-link" href="/contact"> Contact </a>
+            <a className="nav-link" href="/createassingment">
+              {" "}
+              About Us{" "}
+            </a>
+            <a className="nav-link" href="/detailsofassing">
+              {" "}
+              Contact{" "}
+            </a>
 
-              {isAuthenticated ? (
-                <>
-                  <a href="/">
-                    <button type="button" className="btn btn-danger" onClick={handleLogout}> Logout </button>
-                  </a>
-                </>
-              ) : (
-                <>
-                  <a href="/loginPage">
-                    <button type="button" className="btn btn-primary" href="/loginPage"> Login </button>
-                  </a>
-                </>
-                
-              )}
-           
+            {isAuthenticated ? (
+              <>
+                <a href="/">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={handleLogout}
+                  >
+                    {" "}
+                    Logout{" "}
+                  </button>
+                </a>
+              </>
+            ) : (
+              <>
+                <a href="/loginPage">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    href="/loginPage"
+                  >
+                    {" "}
+                    Login{" "}
+                  </button>
+                </a>
+              </>
+            )}
           </div>
 
           <div className="customDropdown">
@@ -105,32 +122,44 @@ function Navbar() {
             <ul className="customDropdownMenu">
               {isAuthenticated ? (
                 <>
-                  {userType === 'teacher' && (
-                    <a href='/dashboard/teacher'>
-                      <button className="customDropdownItem">Teacher Dashboard</button>
+                  {userType === "teacher" && (
+                    <a href="/dashboard/teacher">
+                      <button className="customDropdownItem">
+                        Teacher Dashboard
+                      </button>
                     </a>
                   )}
-                  {userType === 'student' && (
-                    <a href='/dashboard/student'>
-                      <button className="customDropdownItem">Student Dashboard</button>
+                  {userType === "student" && (
+                    <a href="/dashboard/student">
+                      <button className="customDropdownItem">
+                        Student Dashboard
+                      </button>
                     </a>
                   )}
-                  {userType === 'admin' && (
-                    <a href='/dashboard/admin'>
-                      <button className="customDropdownItem">Admin Dashboard</button>
+                  {userType === "admin" && (
+                    <a href="/dashboard/admin">
+                      <button className="customDropdownItem">
+                        Admin Dashboard
+                      </button>
                     </a>
                   )}
                 </>
               ) : (
                 <>
-                  <a href='/dashboard/teacher'>
-                    <button className="customDropdownItem">Teacher Dashboard</button>
+                  <a href="/dashboard/teacher">
+                    <button className="customDropdownItem">
+                      Teacher Dashboard
+                    </button>
                   </a>
-                  <a href='/dashboard/student'>
-                    <button className="customDropdownItem">Student Dashboard</button>
+                  <a href="/dashboard/student">
+                    <button className="customDropdownItem">
+                      Student Dashboard
+                    </button>
                   </a>
-                  <a href='/dashboard/admin'>
-                    <button className="customDropdownItem">Admin Dashboard</button>
+                  <a href="/dashboard/admin">
+                    <button className="customDropdownItem">
+                      Admin Dashboard
+                    </button>
                   </a>
                 </>
               )}

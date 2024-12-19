@@ -1,10 +1,8 @@
-// src/pages/StudentDashboard.jsx
-
 import React, { useEffect, useState } from "react";
 import {
-  AcademicCapIcon,
-  UsersIcon,
-  PresentationChartBarIcon,
+  CheckCircleIcon, // New icon for Completed Assignments
+  ExclamationCircleIcon, // New icon for Pending Assignments
+  UserGroupIcon, // Icon for Classmates
 } from "@heroicons/react/24/outline";
 import {
   LineChart,
@@ -35,13 +33,27 @@ const performanceData = [
 ];
 
 const recentActivities = [
-  { id: 1, title: "Assignment 1: Introduction to Algorithms", date: "2023-10-01", status: "Completed" },
-  { id: 2, title: "Assignment 2: Data Structures", date: "2023-10-05", status: "Completed" },
-  { id: 3, title: "Assignment 3: Sorting Algorithms", date: "2023-10-10", status: "Pending" },
+  {
+    id: 1,
+    title: "Assignment 1: Introduction to Algorithms",
+    date: "2023-10-01",
+    status: "Completed",
+  },
+  {
+    id: 2,
+    title: "Assignment 2: Data Structures",
+    date: "2023-10-05",
+    status: "Completed",
+  },
+  {
+    id: 3,
+    title: "Assignment 3: Sorting Algorithms",
+    date: "2023-10-10",
+    status: "Pending",
+  },
 ];
 
 function StudentDashboard() {
-  
   const [loader, setLoader] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
@@ -58,7 +70,12 @@ function StudentDashboard() {
     <>
       {loader && <Loader />}
       {showPopup && (
-        <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} type="error" />
+        <Popup
+          message={message}
+          setShowPopup={setShowPopup}
+          showPopup={showPopup}
+          type="error"
+        />
       )}
       <div className="dashboard-container">
         <header className="dashboard-header">
@@ -71,21 +88,21 @@ function StudentDashboard() {
 
         <div className="overview-cards">
           <div className="card completed-assignments">
-            <AcademicCapIcon className="icon" />
+            <CheckCircleIcon className="icon" /> {/* Updated Icon */}
             <div>
               <p className="card-value">5</p>
               <p className="card-label">Completed Assignments</p>
             </div>
           </div>
           <div className="card pending-assignments">
-            <UsersIcon className="icon" />
+            <ExclamationCircleIcon className="icon" /> {/* Updated Icon */}
             <div>
               <p className="card-value">2</p>
               <p className="card-label">Pending Assignments</p>
             </div>
           </div>
           <div className="card classmates">
-            <PresentationChartBarIcon className="icon" />
+            <UserGroupIcon className="icon" />
             <div>
               <p className="card-value">20</p>
               <p className="card-label">Classmates</p>
@@ -125,7 +142,12 @@ function StudentDashboard() {
               <XAxis dataKey="month" stroke="#a0aec0" />
               <YAxis stroke="#a0aec0" domain={[70, 100]} />
               <Tooltip />
-              <Line type="monotone" dataKey="grade" stroke="#3182ce" strokeWidth={2} />
+              <Line
+                type="monotone"
+                dataKey="grade"
+                stroke="#3182ce"
+                strokeWidth={2}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>

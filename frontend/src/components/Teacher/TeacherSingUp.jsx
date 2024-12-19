@@ -17,7 +17,7 @@ function TeacherSignUp() {
 
     const handleTeacherSignup = async (e) => {
       e.preventDefault();
-      // setLoading(true); 
+      
       
       const myForm = new FormData();
   

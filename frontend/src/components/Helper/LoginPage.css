@@ -23,17 +23,12 @@
 .styled-typography {
     margin-bottom: 10px;
 }
+a {
+  text-decoration: none;
+  color: inherit; /* Ensure the text color remains unchanged */
+}
 
-
-
-
-
-
-
-
-
-/* .overview-cards {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(1, 1fr);
-  } */
+/* Optional: Add hover effect for better UX */
+a:hover {
+  text-decoration: none;
+}

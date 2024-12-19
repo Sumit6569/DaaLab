@@ -1,16 +1,18 @@
+/* General container styling */
 .container2 {
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-  padding: 15px 40px; /* Increased padding for better layout */
+  background-color:#F7FAFC; /* Semi-transparent white */
+  padding: 15px 40px; /* Padding for better spacing */
   border-radius: 8px;
-  width: 70vh !important;
+  width: 70vh !important; /* Fixed width for larger screens */
   margin: auto;
   position: absolute;
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2; /* Ensure it is above the slider */
+  z-index: 2; /* Ensure it is above other content */
 }
 
+/* Inner container to align content */
 .inner-container2 {
   margin-top: 0px;
   width: 100% !important;
@@ -19,170 +21,107 @@
   align-items: center;
 }
 
+/* Form logo */
 .logo img {
-  width: 150px; /* Adjust logo size */
+  width: 150px; /* Logo size */
 }
 
-.googleImg {
-  height: 3rem;
-  width: 3rem;
-}
-
+/* Title styling */
 .title {
-  font-size: 28px; /* Increased title size for better visibility */
+  font-size: 28px;
   margin: 0;
+  color: #333;
 }
 
-.auth-account {
-  width: 90vh;
-}
-
+/* Form input fields */
 .form {
   width: 50vh;
-  margin-top: 10px; /* Increased margin for better spacing */
+  margin-top: 10px;
 }
 
 .input {
   width: 100%;
-  padding: 12px; /* Increased padding for a larger input area */
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 15px;
-  font-size: 16px; /* Increased font size for better readability */
+  font-size: 16px;
+  margin-bottom: 1px; /* Add spacing between inputs */
 }
 
-.separator {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
+.input:focus {
+  border-color: #4caf50; /* Highlight border when focused */
+  outline: none;
 }
 
-.separator span {
-  flex-grow: 1;
-  height: 1px;
-  background-color: #ccc;
-}
-
-.tst {
-  margin-top: 1rem;
-  font-size: 1.3rem;
-}
-
-.google-login {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  width: 50vh;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  border: solid 0.1rem black;
-  margin-top: 20px; /* Added margin for spacing */
-}
-
-.google-login:hover {
-  box-shadow: 0px 0px 3px black;
-  border: 2px solid black;
-}
-
-.google-login div {
-  font-weight: 600;
-}
-
-.google-login img {
-  margin-right: 10px; /* Spacing between image and text */
-}
-
+/* Submit button */
 .submit-button {
   width: 100%;
-  padding: 12px; /* Increased padding for a larger button */
+  padding: 12px;
   background-color: #4caf50; /* Green background */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 15px; /* Increased margin for better spacing */
-  font-size: 16px; /* Increased font size for better readability */
-  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  margin-top: 15px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
 }
 
-.sign-up-link {
-  color: #007bff; /* Link color */
-  text-decoration: none; /* Remove underline from links */
+/* File input styling */
+input[type="file"] {
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 /* Media Queries for Responsive Design */
-@media (max-width: 1200px) {
-  .container2 {
-    width: 60%; /* Adjust width for medium screens */
-  }
-
-  .form {
-    width: 60vh; /* Adjust form width */
-  }
-
-  .google-login {
-    width: 60vh; /* Adjust Google login button width */
-  }
-}
-
 @media (max-width: 768px) {
   .container2 {
-    width: 50vh; /* Adjust width for medium screens */
+    width: 90%;
+    top: 50%;
   }
 
   .form {
-    width: 40vh; /* Adjust form width */
+    width: 25vh;
   }
 
-  .google-login {
-    width: 40vh; /* Adjust Google login button width */
-  }
-}
-
-@media (max-width: 580px) {
-  .container2 {
-    width: 50vh !important;
-    /* padding: 0px; Adjust width for medium screens */
+  .input {
+    font-size: 14px;
+    padding: 10px;
+    height: 6vh;
   }
 
-  .inner-container2 {
-    width: 40vh !important;
-  }
-
-  .form {
-    width: 40vh; /* Adjust form width */
-  }
-
-  .tst {
-    font-size: 1.1rem;
-  }
-  .google-login {
-    width: 40vh; /* Adjust Google login button width */
+  .submit-button {
+    padding: 10px;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .container2 {
-    width: 40vh !important;
+    width: 95%;
+    padding: 10px;
   }
 
-  .inner-container2 {
-    width: 30vh !important;
+  .title {
+    font-size: 20px;
   }
 
   .form {
-    width: 35vh; /* Adjust form width */
+    width: 25vh;
   }
 
-  .tst {
-    font-size: 1.1rem;
+  .input {
+    font-size: 12px;
+    padding: 8px;
+    height: 6vh;
   }
-  .google-login {
-    width: 35vh; /* Adjust Google login button width */
+
+  .submit-button {
+    font-size: 12px;
+    padding: 8px;
   }
 }
-

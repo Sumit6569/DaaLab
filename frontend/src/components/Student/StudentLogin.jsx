@@ -91,11 +91,7 @@ function StudentLogin() {
           <p className="mt-2 separator">
               <span></span> <b>Or</b> <span></span>
             </p>
-            <a onClick={handleGoogleLogin} className="google-login">
-              <img src='/google.png' className='googleImg' alt="Google Icon" />
-              <div >Continue with Google</div>
-            </a>
-
+           
           </div>
 
           <div className="tst">
