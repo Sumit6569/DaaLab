@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home.jsx";
-import Progress from "./components/Progress.jsx";
+import './index.css'; // Adjust the path if needed
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import DaaLab from "./components/Lab/DaaLab.jsx";
 import StudentSingUp from "./components/Student/StudentSingUp.jsx";
@@ -13,8 +14,7 @@ import StudentDashboard from "./components/Dashboard/StudentDashboard/StudentDas
 import TeacherDashboard from "./components/Dashboard/TeacherDashboard/TeacherDashboard.jsx";
 import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
- // Check the path and extension
-
+// Check the path and extension
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,6 +32,8 @@ import CreateAssing from "./components/Assingment/CreateAssing.jsx";
 import DetailOfAssingment from "./components/Assingment/DetailOfAssingment.jsx";
 import AssignmentSubmit from "./components/Assingment/AssignmentSubmit.jsx";
 import Footer from "../src/components/Footer/Footer.jsx";
+import TeacherList from "./components/Dashboard/AdminDashboard/TeacherList.jsx";
+import StudentList from "./components/Dashboard/AdminDashboard/StudentList.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,7 +54,6 @@ function App() {
       state.student?.isAuthenticated || state.teacher?.isAuthenticated,
   }));
 
-   
   return (
     <>
       <ToastContainer
@@ -70,7 +71,6 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/progress" element={<Progress />} />
           <Route path="/dashboard/student" element={<StudentDashboard />} />
           <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
@@ -82,10 +82,14 @@ function App() {
           <Route path="/teacher/login" element={<TeacherLogin />} />
           <Route path="/teacher/signup" element={<TeacherSingUp />} />
           <Route path="/createassingment" element={<CreateAssing />} />
-          <Route path="/detailsofassing" element={<DetailOfAssingment />} />
+          <Route
+            path="/student/detailsofassing"
+            element={<DetailOfAssingment />}
+          />
           <Route path="/submitassingment" element={<AssignmentSubmit />} />
+          <Route path="/teacherlist" element={<TeacherList />} />
+          <Route path="/studentlist" element={<StudentList />} />
         </Routes>
-        
       </Router>
       <Footer />
     </>

@@ -1,54 +1,34 @@
 import React, { useEffect, useState } from "react";
 import {
-  CheckCircleIcon, // New icon for Completed Assignments
-  ExclamationCircleIcon, // New icon for Pending Assignments
-  UserGroupIcon, // Icon for Classmates
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import Popup from "../../Popup.jsx";
+import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader.jsx";
-import "./StudentDashboard.css";
 
-const performanceData = [
-  { month: "Jan", grade: 75 },
-  { month: "Feb", grade: 80 },
-  { month: "Mar", grade: 78 },
-  { month: "Apr", grade: 85 },
-  { month: "May", grade: 90 },
-  { month: "Jun", grade: 88 },
-  { month: "Jul", grade: 92 },
-  { month: "Aug", grade: 85 },
-  { month: "Sep", grade: 87 },
-  { month: "Oct", grade: 90 },
-  { month: "Nov", grade: 93 },
-  { month: "Dec", grade: 95 },
-];
+import "./StudentDashboard.css";
 
 const recentActivities = [
   {
     id: 1,
     title: "Assignment 1: Introduction to Algorithms",
-    date: "2023-10-01",
+    assignDate: "2023-09-25",
+    dueDate: "2023-10-01",
     status: "Completed",
   },
   {
     id: 2,
     title: "Assignment 2: Data Structures",
-    date: "2023-10-05",
+    assignDate: "2023-09-30",
+    dueDate: "2023-10-05",
     status: "Completed",
   },
   {
     id: 3,
     title: "Assignment 3: Sorting Algorithms",
-    date: "2023-10-10",
+    assignDate: "2023-10-06",
+    dueDate: "2023-10-10",
     status: "Pending",
   },
 ];
@@ -57,6 +37,16 @@ function StudentDashboard() {
   const [loader, setLoader] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
+
+  // Mock student data
+  const student = {
+    fullName: "John Doe",
+    id: "12345",
+    email: "johndoe@example.com",
+    branch: "Computer Science",
+    avatar: "https://via.placeholder.com/150", // Placeholder avatar
+    provider: "Google",
+  };
 
   useEffect(() => {
     setLoader(true);
@@ -80,22 +70,42 @@ function StudentDashboard() {
       <div className="dashboard-container">
         <header className="dashboard-header">
           <h1 className="dashboard-title">Student Dashboard</h1>
-          <nav className="dashboard-nav">
-            <a href="/student/dashboard">Dashboard</a>
-            <a href="/student/profile">Profile</a>
-          </nav>
         </header>
+
+        {/* Student Details Section */}
+        <div className="student-details">
+          <div className="student-avatar">
+            <img src={student.avatar} alt="Student Avatar" />
+          </div>
+          <div className="student-info">
+            <p>
+              <strong>Full Name:</strong> {student.fullName}
+            </p>
+            <p>
+              <strong>Student ID:</strong> {student.id}
+            </p>
+            <p>
+              <strong>Email:</strong> {student.email}
+            </p>
+            <p>
+              <strong>Branch:</strong> {student.branch}
+            </p>
+            <p>
+              <strong>Provider:</strong> {student.provider}
+            </p>
+          </div>
+        </div>
 
         <div className="overview-cards">
           <div className="card completed-assignments">
-            <CheckCircleIcon className="icon" /> {/* Updated Icon */}
+            <CheckCircleIcon className="icon" />
             <div>
               <p className="card-value">5</p>
               <p className="card-label">Completed Assignments</p>
             </div>
           </div>
           <div className="card pending-assignments">
-            <ExclamationCircleIcon className="icon" /> {/* Updated Icon */}
+            <ExclamationCircleIcon className="icon" />
             <div>
               <p className="card-value">2</p>
               <p className="card-label">Pending Assignments</p>
@@ -116,7 +126,8 @@ function StudentDashboard() {
             <thead>
               <tr>
                 <th>Activity</th>
-                <th>Date</th>
+                <th>Assign Date</th>
+                <th>Due Date</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -124,32 +135,15 @@ function StudentDashboard() {
               {recentActivities.map((activity) => (
                 <tr key={activity.id}>
                   <td>{activity.title}</td>
-                  <td>{activity.date}</td>
+                  <td>{activity.assignDate}</td>
+                  <td>{activity.dueDate}</td>
                   <td className={`status ${activity.status.toLowerCase()}`}>
-                    {activity.status}
+                    <Link to="/submitassingment">{activity.status}</Link>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-
-        <div className="performance-chart">
-          <h2 className="chart-title">Performance Over Time</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={performanceData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" stroke="#a0aec0" />
-              <YAxis stroke="#a0aec0" domain={[70, 100]} />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="grade"
-                stroke="#3182ce"
-                strokeWidth={2}
-              />
-            </LineChart>
-          </ResponsiveContainer>
         </div>
       </div>
     </>

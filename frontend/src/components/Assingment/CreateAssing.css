@@ -1,174 +1,136 @@
-/* Container styling */
+/* General container styling */
 .create-assignment-container {
   max-width: 600px;
   margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  background: #f8f9fa; /* Lighter background for better readability */
+  border-radius: 10px; /* Slightly larger border radius for a modern look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
+  border: 1px solid #ddd; /* Subtle border for contrast */
 }
 
-/* Form group styling */
+/* Form header */
+.create-assignment-container h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #2c3e50; /* Darker text for better readability */
+  font-family: "Arial", sans-serif;
+  font-weight: 600;
+}
+
+/* Form group */
 .form-group {
   margin-bottom: 20px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #444; /* Slightly darker color for contrast */
 }
 
 input[type="text"],
 textarea,
 input[type="file"] {
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; /* Includes padding in width */
+  border-radius: 6px; /* Larger radius for consistency with the container */
+  font-size: 15px;
+  color: #333;
+  background: #fff; /* Explicit white background for clarity */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff; /* Highlighted border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
 }
 
 textarea {
+  min-height: 120px; /* Slightly taller default height */
   resize: vertical;
-  min-height: 100px;
 }
 
-/* Checkbox group styling */
-.form-group input[type="checkbox"] {
-  margin-right: 8px;
-}
-
-.form-group div {
+/* Checkbox group */
+.checkbox-group {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  gap: 10px; /* Consistent spacing between items */
 }
 
-/* Button styling */
+.checkbox-group input {
+  margin-right: 8px;
+}
+
+.checkbox-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+/* Submit button */
 .submit-button {
-  background-color: #4caf50;
+  width: 100%;
+  background: linear-gradient(90deg, #4caf50, #4caf50); /* Gradient for a modern look */
   color: white;
-  padding: 10px 20px;
+  padding: 14px 20px;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 6px;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase; /* Button text styling */
+  transition: all 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #45a049;
+  background: linear-gradient(90deg, #4caf50, #4caf50); /* Darker gradient on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+  transform: translateY(-2px); /* Slight lift on hover */
 }
 
-/* Responsive media query for tablets */
+/* Responsive design */
 @media (max-width: 768px) {
   .create-assignment-container {
-    padding: 15px;
-    margin: 10px;
-  }
-
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    padding: 8px;
-    font-size: 14px;
+    padding: 20px;
   }
 
   .submit-button {
-    font-size: 14px;
-    padding: 8px 15px;
-  }
-
-  label {
-    font-size: 14px;
+    font-size: 15px;
+    padding: 12px 18px;
   }
 }
 
-/* Responsive media query for mobile devices */
 @media (max-width: 480px) {
   .create-assignment-container {
-    padding: 10px;
-    margin: 5px;
+    padding: 15px;
   }
 
   h2 {
-    font-size: 20px;
-    text-align: center;
+    font-size: 22px;
+  }
+
+  label {
+    font-size: 13px;
   }
 
   input[type="text"],
   textarea,
   input[type="file"] {
-    font-size: 12px;
-    padding: 6px;
+    padding: 12px;
+    font-size: 14px;
   }
 
   .submit-button {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  label {
-    font-size: 12px;
-  }
-
-  .form-group div {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-/* Responsive media query for smaller mobile screens (360px) */
-@media (max-width: 360px) {
-  .create-assignment-container {
-    padding: 8px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 10px;
-    padding: 5px;
-  }
-
-  .submit-button {
-    font-size: 10px;
-    padding: 5px 10px;
-  }
-
-  label {
-    font-size: 10px;
-  }
-}
-
-/* Responsive media query for very small screens (320px) */
-@media (max-width: 320px) {
-  .create-assignment-container {
-    padding: 5px;
-  }
-
-  h2 {
-    font-size: 16px;
-  }
-
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 9px;
-    padding: 4px;
-  }
-
-  .submit-button {
-    font-size: 9px;
-    padding: 4px 8px;
-  }
-
-  label {
-    font-size: 9px;
+    font-size: 14px;
+    padding: 10px 16px;
   }
 }
