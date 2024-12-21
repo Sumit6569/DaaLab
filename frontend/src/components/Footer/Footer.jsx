@@ -1,3 +1,4 @@
+import "./Footer.css"
 const Footer = () => {
   // Ensure teamMembers is always defined as an array
   const teamMembers =

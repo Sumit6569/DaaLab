@@ -1,5 +1,5 @@
 import React from "react";
-import "./Daalab.css";
+import "./DaaLab.css";
 
 const Daalab = () => {
   const units = [
