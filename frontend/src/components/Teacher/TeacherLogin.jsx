@@ -52,9 +52,7 @@ function TeacherLogin() {
           <div className="logo">
             <img src="/logo.png" alt="Logo" />
           </div>
-
           <p className="title">Login as a Teacher</p>
-
           <form onSubmit={handleTeacherLogin}>
             <div className="form">
               <label htmlFor="email">Email:</label>
@@ -86,13 +84,6 @@ function TeacherLogin() {
               </button>
             </div>
           </form>
-
-          <div className="tst">
-            Don't have an account?{" "}
-            <Link to="/teacher/signup" className="sign-up-link">
-              Sign Up
-            </Link>
-          </div>
         </div>
       </div>
     </div>

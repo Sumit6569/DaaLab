@@ -152,10 +152,10 @@
   text-align: center;
 }
 
-.section { background-color: #4a90e2; }
-.total-students { background-color: #50e3c2; }
-.total-submitted { background-color: #f5a623; }
-.left-submission { background-color: #e94e77; }
+.section { background-color: #4caf50; }
+.total-students { background-color: #4caf50; }
+.total-submitted { background-color: #4caf50; }
+.left-submission { background-color: #4caf50; }
 
 .card-content {
   padding: 1rem;
@@ -176,6 +176,36 @@
   margin: 20px 0px;
 }
 
+
+/* Sidebar container */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.create-assignment-btn {
+  background-color: #26cf94;
+  color: white;
+  padding: 2px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 100px;
+}
+
+.create-assignment-btn:hover {
+  background-color: #26cf94;
+}
+
+.create-assignment-btn:focus {
+  outline: none;
+}
+
 .assignment div {
   display: flex;
   justify-content: space-between;
@@ -188,7 +218,7 @@
 }
 
 .assignment button {
-  background-color: #3498db;
+  background-color: #4caf50;
   color: white;
   
   border: none;
@@ -198,7 +228,7 @@
 }
 
 .assignment button:hover {
-  background-color: #2980b9;
+  background-color: #08890c;
 }
 
   .student-info {
@@ -222,6 +252,8 @@
     border-collapse: collapse;
     border-radius: 1rem;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 5px;
+    
   }
   
   .dashboard-table th, .dashboard-table td {
@@ -239,3 +271,32 @@
     background-color: #f1f1f1;
   }
   
+
+  .teacher-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  
+}
+
+.teacher-avatar img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.teacher-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  
+}
+.teacher-info{
+  gap: 8px;
+}
+
+.dashboard-container {
+  padding: 20px;
+  
+}

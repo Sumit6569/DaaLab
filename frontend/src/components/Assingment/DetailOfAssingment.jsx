@@ -17,6 +17,21 @@ const AssignmentDetails = ({ assignment }) => {
           <strong>Status:</strong> assignment.status
         </p>
       </div>
+      
+        <button
+          className="download-button"
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = assignment.fileUrl;
+            link.download = assignment.fileName || "assignment_file";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
+        >
+          Download File
+        </button>
+ 
     </div>
   );
 };

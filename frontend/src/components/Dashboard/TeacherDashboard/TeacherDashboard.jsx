@@ -55,7 +55,6 @@
 //   setTotalSubmitted(countSubmissions);
 // }, [selectedStudents, selectedAssignmentWork]);
 
-
 //   const totalStudents = selectedStudents.length;
 //   // const totalSubmitted = selectedAssignmentWork.length;
 //   const leftSubmission = totalStudents - totalSubmitted;
@@ -223,13 +222,11 @@
 
 // export default TeacherDashboard;
 
-
-
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./TeacherDashboard.css";
-
+import { Link } from "react-router-dom";
 function TeacherDashboard({
   teacher = {},
   section = [],
@@ -257,11 +254,12 @@ function TeacherDashboard({
   const toggleSidebar = () => setShowSidebar((prev) => !prev);
 
   // Filters assignments to show only those relevant to the selected section
-  const filteredAssignments = assignment && selectedSection
-    ? assignment.filter((item) =>
-        item.sectionId.some((sec) => sec._id === selectedSection._id)
-      )
-    : [];
+  const filteredAssignments =
+    assignment && selectedSection
+      ? assignment.filter((item) =>
+          item.sectionId.some((sec) => sec._id === selectedSection._id)
+        )
+      : [];
 
   // Handles assignment selection and loads work data for selected assignment
   const handleAssignmentClick = (assignmentId) => {
@@ -269,7 +267,9 @@ function TeacherDashboard({
       work.assignments.some((assign) => assign._id === assignmentId)
     );
     setSelectedAssignmentWork(workForAssignment); // Set relevant student work
-    const assignmentDetails = assignment.find((assign) => assign._id === assignmentId);
+    const assignmentDetails = assignment.find(
+      (assign) => assign._id === assignmentId
+    );
     setSelectedAssignment(assignmentDetails); // Set selected assignment details
   };
 
@@ -319,6 +319,12 @@ function TeacherDashboard({
             </ul>
           </div>
         </div>
+
+        <div className="sidebar-footer">
+          <Link to="/createassingment">
+            <button className="create-assignment-btn">Create Assignment</button>
+          </Link>
+        </div>
       </div>
 
       {/* Main content area */}
@@ -329,10 +335,25 @@ function TeacherDashboard({
             <span>
               Welcome back, <b>{fullName}</b>
             </span>
+            <div className="teacher-info">
+              <p>
+                <strong>Full Name:</strong>Sumit Kumar 
+              </p>
+              <p>
+                <strong>Teacher ID:</strong> 12345
+              </p>
+              <p>
+                <strong>Email:</strong> insfo@gmail.com
+              </p>
+              <p>
+                <strong>Department:</strong> CSE
+              </p>
+              <p>
+                <strong>Provider:</strong> {teacher.provider}
+              </p>
+            </div>
           </div>
-          <a href="">
-            <img src="/img2.jpg" alt="Profile" />
-          </a>
+          
         </div>
 
         {/* Display cards for selected section, total students, and submission counts */}
@@ -341,9 +362,11 @@ function TeacherDashboard({
             <div className="card-header section">
               Section {selectedSection?.name || "N/A"}
             </div>
-            <br/>
+            <br />
             <div className="card-header section">
-              {selectedAssignment ? selectedAssignment.title : "Select an Assignment"}
+              {selectedAssignment
+                ? selectedAssignment.title
+                : "Select an Assignment"}
             </div>
           </div>
           <div className="card">

@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "../Slider/Slider";
  // Ensure this path is correct
 import ImageGrid from "../ImageGrid";
-import StartLerlingButton from "../StartLerlingButton";
+
 import ImageComp from "../ImgComp/ImageComp";
 import "./Home.css"; // Import the custom CSS for styles
 import Footer from "../Footer/Footer";

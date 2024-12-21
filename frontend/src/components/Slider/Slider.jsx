@@ -88,6 +88,7 @@ function Slider() {
       <button className="slider-control next" onClick={handleNext}>
         <span className="control-icon">&#10095;</span>
       </button>
+      
     </div>
   );
 }
