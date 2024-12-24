@@ -1,3 +1,4 @@
+import "./Footer.css"
 const Footer = () => {
   // Ensure teamMembers is always defined as an array
   const teamMembers =
@@ -15,7 +16,7 @@ const Footer = () => {
         isHead: false,
       },
       {
-        name: "Vikas Kumar",
+        name: "Vikash Kumar",
         role: "FullStack Developer",
         info: "Specialized in Node.js and Database",
         isHead: false,

@@ -20,27 +20,13 @@ import {
   FORGOTPASSWORD_REQUEST,
   FORGOTPASSWORD_SUCCESS,
   FORGOTPASSWORD_FAIL,
-  GET_ASSIGNMENT_REQUEST,
-  GET_ASSIGNMENT_SUCCESS,
 } from "../constrants/ATSConstrants";
 
 export const getTeacherDetails = () => async (dispatch) => {
   try {
     dispatch({ type: GET_TEACHER_REQUEST });
 
-    const token = localStorage.getItem("accessToken"); // Adjust if using a different token key
-    if (!token) {
-      throw new Error("Token not found");
-    }
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const { data } = await api.get("/teachers/getTeacherDetails", config); // Adjust the endpoint if necessary
-    console.log("pk: ",data);
+    const { data } = await api.get("/teachers/getTeacherDetails"); // Adjust the endpoint if necessary
     
     dispatch({
       type: GET_TEACHER_SUCCESS,

@@ -1,5 +1,7 @@
 /* General container styling */
 .create-assignment-container {
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   margin: 20px auto;
   padding: 25px;
@@ -97,6 +99,41 @@ textarea {
   transform: translateY(-2px); /* Slight lift on hover */
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between items */
+  justify-content: space-between;
+}
+
+/* Flexbox child items */
+.row .form-group {
+  flex: 1; /* Allow items to grow and take equal space */
+  min-width: 45%; /* Minimum width to maintain responsiveness */
+}
+
+.row .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #444;
+}
+
+.row .form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fff;
+}
+
+.row .form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 /* Responsive design */
 @media (max-width: 768px) {
   .create-assignment-container {

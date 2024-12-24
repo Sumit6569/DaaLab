@@ -35,19 +35,8 @@ export const getStudentDetails = () => async (dispatch) => {
     try {
       dispatch({ type: GET_STUDENT_REQUEST });
   
-      const token = localStorage.getItem('accessToken'); // Adjust if using a different token key
-      if (!token) {
-        throw new Error('Token not found');
-      }
-  
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-  
-      const {data} = await api.get("/students/getStudentDetails", config); // Adjust the endpoint if necessary
-      console.log("pkkk : ", data)
+      const {data} = await api.get("/students/getStudentDetails"); // Adjust the endpoint if necessary
+
       dispatch({
         type: GET_STUDENT_SUCCESS,
         payload: data,

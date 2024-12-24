@@ -1,45 +1,93 @@
+/* Base styles for the AssignmentDetails container */
 .assignment-details {
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 10px;
     padding: 20px;
-    margin: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.assignment-title {
-    font-size: 24px;
-    color: #333;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling */
+  .assignment-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #343a40;
     margin-bottom: 10px;
-}
-
-.assignment-description {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-.assignment-info {
-    font-size: 14px;
-    color: #777;
-}
-
-.assignment-info p {
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+  }
+  
+  /* Description styling */
+  .assignment-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    margin: 10px 0;
+    text-align: justify;
+  }
+  
+  /* Info section styling */
+  .assignment-info {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+  }
+  
+  /* Info text styling */
+  .assignment-info p {
     margin: 5px 0;
-}
-
-.download-button {
-    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #212529;
+  }
+  
+  .assignment-info strong {
+    color: #060b02;
+  }
+  
+  /* Download button styling */
+  .download-button {
+    display: block;
+    width: 100%;
+    text-align: center;
     padding: 10px 15px;
-    font-size: 14px;
+    font-size: 1rem;
+    font-weight: bold;
     color: #fff;
-    background-color: #4caf50;
+    background: rgb(16, 190, 16);
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.download-button:hover {
-    background-color: #45a049;
-}
+    transition: background 0.3s ease;
+    margin-top: 15px;
+  }
+  
+  .download-button:hover {
+    background: #3fc10c;
+  }
+  
+  /* Add responsiveness */
+  @media (max-width: 768px) {
+    .assignment-details {
+      padding: 15px;
+      margin: 10px;
+    }
+  
+    .assignment-title {
+      font-size: 1.5rem;
+    }
+  
+    .assignment-description {
+      font-size: 0.9rem;
+    }
+  
+    .download-button {
+      font-size: 0.9rem;
+    }
+  }
+  

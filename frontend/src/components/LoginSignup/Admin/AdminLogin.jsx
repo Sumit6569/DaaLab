@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Teacher/TeacherSingUp"; // Corrected CSS import to match the file name
-import Slider from "../Slider/Slider";
-import { adminLogin } from "../../action/teacherAction";
+import Slider from "../../Slider/Slider";
+import { adminLogin } from "../../../action/teacherAction";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";

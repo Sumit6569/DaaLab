@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./TeacherSignUp.css"; // Corrected CSS import to match the file name
-import Slider from "../Slider/Slider";
+
 import { useDispatch } from "react-redux";
-import { teacherLogin } from "../../action/teacherAction";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Slider from "../../Slider/Slider";
+import { teacherLogin } from "../../../action/teacherAction";
 
 function TeacherLogin() {
   const dispatch = useDispatch();

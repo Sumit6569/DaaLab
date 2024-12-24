@@ -71,11 +71,11 @@ function Navbar() {
               Home
             </a>
 
-            <a className="nav-link" href="/createassingment">
+            <a className="nav-link" href="">
               {" "}
               About Us{" "}
             </a>
-            <a className="nav-link" href="/detailsofassing">
+            <a className="nav-link" href="">
               {" "}
               Contact{" "}
             </a>
