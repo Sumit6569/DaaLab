@@ -28,13 +28,10 @@ import {
     GOOGLE_LOGIN_REQUEST,
     GOOGLE_LOGIN_SUCCESS,
     GOOGLE_LOGIN_FAIL,
-    GET_ASSIGNMENT_REQUEST,
-    GET_ASSIGNMENT_SUCCESS,
-    GET_ASSIGNMENT_FAIL,
-    
+
 } from "../constrants/ATSConstrants"
 
-const teacherReducer = (state = {teacher : {}}, action) => {
+export const teacherReducer = (state = {teacher : {}}, action) => {
     switch (action.type) {
         case SIGNUP_REQUEST:
         case LOGIN_REQUEST:
@@ -94,8 +91,16 @@ const teacherReducer = (state = {teacher : {}}, action) => {
             return {
                 ...state,
                 error: null,
-            };
-        
+            };     
+    
+        default:
+            return state;
+    }
+}
+
+export const teacherDetailReducer = (state = {teacherDetails : {}}, action) => {
+    switch (action.type) {
+     
         case GET_TEACHER_REQUEST:
             return {
                 ...state,
@@ -106,52 +111,18 @@ const teacherReducer = (state = {teacher : {}}, action) => {
             return {
                 ...state,
                 loading : false,
-                teacher : action.payload
+                teacherDetails : action.payload
             }
         
         case GET_TEACHER_FAIL:
             return {
                 ...state,
                 loading : false,
-                teacher : null,
+                teacherDetails : null,
                 error : action.payload
         }
-        
-            
     
         default:
             return state;
     }
 }
-
-export const assignmentReducer = (state = {assignment : {}}, action) => {
-    switch (action.type) {
-     
-        case GET_ASSIGNMENT_REQUEST:
-            return {
-                ...state,
-                loading : true,
-            }
-        
-        case GET_ASSIGNMENT_SUCCESS:
-            return {
-                ...state,
-                loading : false,
-                assignment : action.payload
-            }
-        
-        case GET_ASSIGNMENT_FAIL:
-            return {
-                ...state,
-                loading : false,
-                // assignment : null,
-                error : action.payload
-        }
-        
-            
-    
-        default:
-            return state;
-    }
-}
-export default teacherReducer;

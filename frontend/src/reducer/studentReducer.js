@@ -20,7 +20,6 @@ import {
     LOGOUT_REQUEST,
     LOGOUT_SUCCESS,
     STUDENT_LOADED,
-    STUDENT_LOADING,
     AUTH_ERROR,
     
     FORGOTPASSWORD_REQUEST,
@@ -95,7 +94,25 @@ export const studentReducer = (state = {STUDENT : {}}, action) => {
                 ...state,
                 error: null,
             };
-        
+            
+    
+        default:
+            return state;
+    }
+}
+
+const initialState = {
+    studentDetails: {
+      data: [],  // Initialize it as an empty array or any default value
+    },
+    loading: false,
+    error: null,
+  };
+
+
+export const studentDetailReducer = (state = initialState, action) => {
+    switch (action.type) {
+
         case GET_STUDENT_REQUEST:
             return {
                 ...state,
@@ -106,22 +123,18 @@ export const studentReducer = (state = {STUDENT : {}}, action) => {
             return {
                 ...state,
                 loading : false,
-                student : action.payload
+                studentDetails : action.payload
             }
         
         case GET_STUDENT_FAIL:
             return {
                 ...state,
                 loading : false,
-                student : null,
+                studentDetails : null,
                 error : action.payload
         }
-        
-            
     
         default:
             return state;
     }
 }
-
-export default studentReducer;

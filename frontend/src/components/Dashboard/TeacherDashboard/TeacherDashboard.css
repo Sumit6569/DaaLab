@@ -230,6 +230,9 @@
 .assignment button:hover {
   background-color: #08890c;
 }
+.assign :hover {
+  cursor: pointer;
+}
 
   .student-info {
     display: flex;

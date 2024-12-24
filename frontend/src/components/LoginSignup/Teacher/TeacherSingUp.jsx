@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './TeacherSignUp.css'; // Corrected CSS import to match the file name
-import Slider from '../Slider/Slider';
+
 import {useDispatch} from "react-redux";
-import { teacherRegister } from '../../action/teacherAction';
+
 import {toast} from "react-toastify"
 import { useNavigate } from 'react-router-dom';
+import Slider from '../../Slider/Slider';
+import { teacherRegister } from '../../../action/teacherAction';
 
 function TeacherSignUp() {
   const  dispatch = useDispatch()
@@ -12,6 +14,7 @@ function TeacherSignUp() {
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [branch, setBranch] = useState('');
   const [password, setPassword] = useState('');
   const [conformPassword, setConformPassword] = useState('');
 
@@ -23,6 +26,7 @@ function TeacherSignUp() {
   
       myForm.append("fullName", fullName);
       myForm.append("email", email);
+      myForm.append("branch", branch);
       myForm.append("password", password);
       myForm.append("conformPassword", conformPassword)
 
@@ -32,11 +36,12 @@ function TeacherSignUp() {
             toast.success("Teacher register Successfully!");
             setFullName('');
             setEmail('');
+            setBranch('');
             setPassword('');
             setConformPassword('');
 
             // setLoading(false); 
-            navigate("/teacher/login")
+            navigate("/teacherlist")
         } else {
             toast.error(response?.data?.message || "Login failed!", 'error');
             // setLoading(false); // Hide spinner if login fails
@@ -56,7 +61,7 @@ function TeacherSignUp() {
             <img src="/logo.png" alt="Logo" />
           </div>
 
-          <p className="title">Signup as a Teacher</p>
+          <p className="title">Signup new Teacher</p>
 
           <form onSubmit={handleTeacherSignup}>
             <div className="form">
@@ -83,6 +88,14 @@ function TeacherSignUp() {
                 required
                 className="input"
               />
+            </div>
+
+            <div className="form">
+              <label htmlFor="branch">Branch:</label>
+              <select className="form-select" id="branch" onChange={(e) => setBranch(e.target.value)} >
+                <option selected>* Choose Branch</option>
+                <option value="CSE" >CSE</option>
+              </select>
             </div>
             
             <div className="form">

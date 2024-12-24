@@ -3,34 +3,10 @@ import {
   UserGroupIcon, // Icon for Teachers and Students
   AcademicCapIcon, // Icon for Active Courses
 } from "@heroicons/react/24/outline";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-
 import Loader from "../../Loader/Loader.jsx";
 import "./AdminDashboard.css";
 import { Link } from "react-router-dom";
-
-const performanceData = [
-  { month: "Jan", metric: 50 },
-  { month: "Feb", metric: 60 },
-  { month: "Mar", metric: 55 },
-  { month: "Apr", metric: 70 },
-  { month: "May", metric: 75 },
-  { month: "Jun", metric: 80 },
-  { month: "Jul", metric: 85 },
-  { month: "Aug", metric: 78 },
-  { month: "Sep", metric: 80 },
-  { month: "Oct", metric: 85 },
-  { month: "Nov", metric: 90 },
-  { month: "Dec", metric: 95 },
-];
+import PropTypes from "prop-types";
 
 const recentActivities = [
   {
@@ -53,17 +29,10 @@ const recentActivities = [
   },
 ];
 
-function AdminDashboard() {
+function AdminDashboard({teacher={}, studentDetails=[], teacherDetails=[]}) {
   const [loader, setLoader] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
-
-  // Sample admin details (can be fetched from an API or passed as props)
-  const adminDetails = {
-    id: "A123",
-    fullName: "Jane Smith",
-    email: "jane.smith@example.com",
-  };
 
   useEffect(() => {
     setLoader(true);
@@ -94,13 +63,13 @@ function AdminDashboard() {
           <h2 className="admin-title">Admin Details</h2>
           <div className="admin-info">
             <p>
-              <strong>Admin ID:</strong> {adminDetails.id}
+              <strong>Admin ID:</strong> {teacher._id}
             </p>
             <p>
-              <strong>Full Name:</strong> {adminDetails.fullName}
+              <strong>Full Name:</strong> {teacher.fullName}
             </p>
             <p>
-              <strong>Email:</strong> {adminDetails.email}
+              <strong>Email:</strong> {teacher.email}
             </p>
           </div>
         </div>
@@ -110,7 +79,7 @@ function AdminDashboard() {
             <UserGroupIcon className="icon" />
             <Link to="/teacherlist">
               <div>
-                <p className="card-value">10</p>
+                <p className="card-value">{teacherDetails.length}</p>
                 <p className="card-label">Total Teachers</p>
               </div>
             </Link>
@@ -120,7 +89,7 @@ function AdminDashboard() {
             <UserGroupIcon className="icon" />
             <Link to="/studentlist">
               <div>
-                <p className="card-value">150</p>
+                <p className="card-value">{studentDetails.length}</p>
                 <p className="card-label">Total Students</p>
               </div>
             </Link>
@@ -162,5 +131,32 @@ function AdminDashboard() {
     </>
   );
 }
+
+
+AdminDashboard.propTypes = {
+  teacher: PropTypes.object,
+  assignment: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      sectionId: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+  studentDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      sectionId: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+  teacherDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      sectionId: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  )
+};
+
 
 export default AdminDashboard;

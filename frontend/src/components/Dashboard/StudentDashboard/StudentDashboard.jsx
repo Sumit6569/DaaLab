@@ -4,49 +4,67 @@ import {
   ExclamationCircleIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../Loader/Loader.jsx";
 
 import "./StudentDashboard.css";
+import PropTypes from "prop-types";
 
-const recentActivities = [
-  {
-    id: 1,
-    title: "Assignment 1: Introduction to Algorithms",
-    assignDate: "2023-09-25",
-    dueDate: "2023-10-01",
-    status: "Completed",
-  },
-  {
-    id: 2,
-    title: "Assignment 2: Data Structures",
-    assignDate: "2023-09-30",
-    dueDate: "2023-10-05",
-    status: "Completed",
-  },
-  {
-    id: 3,
-    title: "Assignment 3: Sorting Algorithms",
-    assignDate: "2023-10-06",
-    dueDate: "2023-10-10",
-    status: "Pending",
-  },
-];
 
-function StudentDashboard() {
+function StudentDashboard({student={}, section=[], assignment=[], studentWork=[]}) {
+  const navigate = useNavigate();
+
   const [loader, setLoader] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Mock student data
-  const student = {
-    fullName: "John Doe",
-    id: "12345",
-    email: "johndoe@example.com",
-    branch: "Computer Science",
-    avatar: "https://via.placeholder.com/150", // Placeholder avatar
-    provider: "Google",
-  };
+    const sectionData = section || [];
+  
+    // Create a lookup map for sections by ID to optimize performance
+    const sectionMap = React.useMemo(() => {
+      return sectionData.reduce((map, sec) => {
+        map[sec._id] = sec.name;
+        return map;
+      }, {});
+    }, [sectionData]);
+
+    const studentSection = sectionMap[student.sectionId]
+
+    // console.log("studentWork", studentWork);
+    
+
+    const studentSectionAssignments = React.useMemo(() => {
+      const studentSection = section.find((sec) => sec._id === student.sectionId);
+      return studentSection?.assignments || [];
+    }, [section, student.sectionId]);
+    
+    
+    const sectionAssignments = React.useMemo(() => {
+      // Filter assignments whose IDs are in studentSectionAssignments
+      return assignment.filter((assign) => studentSectionAssignments.includes(assign._id));
+    }, [assignment, studentSectionAssignments]);
+    
+    // console.log("Assignments data of student's section:", studentSectionAssignments);
+    
+    const studentWorkData = React.useMemo(() => {
+      return studentWork.filter((work) => work.students === student._id)
+    }, [studentWork, student._id])
+
+    // console.log("Student Work Data:", studentWorkData);
+
+    const handleSubmitAssignment = (assignmentId) => {
+      navigate("/submitassingment", {
+        state: { assignmentId: assignmentId },
+      });
+    };
+
+    const handleAssignmentDetails = (assignmentDetails) => {
+      const provider = student.provider
+      navigate("/assignmentDetails", {
+        state: { assignment: assignmentDetails, provider: provider },
+      });
+      
+    };
 
   useEffect(() => {
     setLoader(true);
@@ -56,6 +74,7 @@ function StudentDashboard() {
     return () => clearTimeout(timer);
   }, []);
 
+  // console.log( assignment )
   return (
     <>
       {loader && <Loader />}
@@ -79,10 +98,10 @@ function StudentDashboard() {
           </div>
           <div className="student-info">
             <p>
-              <strong>Full Name:</strong> {student.fullName}
+              <strong>Student ID:</strong> {student._id}
             </p>
             <p>
-              <strong>Student ID:</strong> {student.id}
+              <strong>Full Name:</strong> {student.fullName}
             </p>
             <p>
               <strong>Email:</strong> {student.email}
@@ -91,7 +110,7 @@ function StudentDashboard() {
               <strong>Branch:</strong> {student.branch}
             </p>
             <p>
-              <strong>Provider:</strong> {student.provider}
+              <strong>Section:</strong> {studentSection}
             </p>
           </div>
         </div>
@@ -100,7 +119,7 @@ function StudentDashboard() {
           <div className="card completed-assignments">
             <CheckCircleIcon className="icon" />
             <div>
-              <p className="card-value">5</p>
+              <p className="card-value">{sectionAssignments.length}</p>
               <p className="card-label">Completed Assignments</p>
             </div>
           </div>
@@ -114,7 +133,7 @@ function StudentDashboard() {
           <div className="card classmates">
             <UserGroupIcon className="icon" />
             <div>
-              <p className="card-value">20</p>
+              <p className="card-value">{studentSectionAssignments.length}</p>
               <p className="card-label">Classmates</p>
             </div>
           </div>
@@ -128,26 +147,84 @@ function StudentDashboard() {
                 <th>Activity</th>
                 <th>Assign Date</th>
                 <th>Due Date</th>
+                <th>Submited work</th>
+                <th>Submitted At</th>
                 <th>Status</th>
               </tr>
             </thead>
+
             <tbody>
-              {recentActivities.map((activity) => (
-                <tr key={activity.id}>
-                  <td>{activity.title}</td>
-                  <td>{activity.assignDate}</td>
-                  <td>{activity.dueDate}</td>
-                  <td className={`status ${activity.status.toLowerCase()}`}>
-                    <Link to="/submitassingment">{activity.status}</Link>
-                  </td>
-                </tr>
-              ))}
+              
+              {sectionAssignments.map((assignment) => {
+
+                // Find the matching studentWork data using studentWorkId
+                const matchingStudentWork = studentWork.find((work) => {
+                  return work._id.toString() === assignment.studentWorkId?.toString();
+                });
+
+                return (
+                  <tr key={assignment._id}>
+                    <td>
+                        <button onClick={() => handleAssignmentDetails(assignment)}> {assignment.title} </button>
+                    </td>
+                    <td>{assignment.createdAt.split("T")[0]}</td>
+                    <td>{assignment.dueDate.split("T")[0]}</td>
+                    <td>
+                      {matchingStudentWork &&
+                        matchingStudentWork.avatar ? (
+                          <a href={matchingStudentWork.avatar}>
+                            <img
+                              className="workImg"
+                              src={matchingStudentWork.avatar}
+                              alt="Student Work"
+                            />
+                          </a>
+                        ) : (
+                          <span>No work submitted</span>
+                      )}
+                    </td>
+                    <td>{matchingStudentWork?.submitedAt.split("T")[0]}</td>
+                    <td className={`status ${matchingStudentWork?.status.toLowerCase() || "unknown"}`}>
+                    <button onClick={() => handleSubmitAssignment(assignment._id)}>
+                      {matchingStudentWork?.status || "Pending"}
+                    </button>
+                      {/* <Link to="/submitassingment">{matchingStudentWork?.status || "Pending"}</Link> */}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
+
           </table>
         </div>
       </div>
     </>
   );
 }
+
+
+StudentDashboard.propTypes = {
+  section: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ),
+  assignment: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      sectionId: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+  studentWork: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      sectionId: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+};
+
 
 export default StudentDashboard;

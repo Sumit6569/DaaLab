@@ -22,25 +22,20 @@ const initialTeachers = [
   },
 ];
 
-function TeacherList() {
+function TeacherList({teacherDetails=[]}) {
   const [teachers, setTeachers] = useState(initialTeachers);
 
   const handleDelete = (id) => {
     const updatedTeachers = teachers.filter((teacher) => teacher.id !== id);
     setTeachers(updatedTeachers);
   };
-
-  const handleCreateTeacher = () => {
-    // Logic for creating a new teacher, for now let's log a message
-    console.log("Creating new teacher...");
-  };
-
+  
   return (
     <div className="teacher-list-container">
       <h2 className="teacher-list-title">Teachers List</h2>
       <Link to={"/teacher/signup"}>
-        <button className="create-teacher-btn" onClick={handleCreateTeacher}>
-          Create New Teacher
+        <button className="create-teacher-btn">
+          Register New Teacher
         </button>
       </Link>
       <table className="teacher-list-table">
@@ -48,16 +43,19 @@ function TeacherList() {
           <tr>
             <th>Teacher Name</th>
             <th>Email</th>
+            <th>Register Date</th>
             <th>Department</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {teachers.map((teacher) => (
-            <tr key={teacher.id}>
-              <td>{teacher.teacherName}</td>
+          {teacherDetails.map((teacher) => (
+            <tr key={teacher._id}>
+              <td>{teacher.fullName}</td>
               <td>{teacher.email}</td>
-              <td>{teacher.department}</td>
+              <td>{teacher.createdAt.split('T')[0]}</td>
+              <td>CSE</td>
+              {/* <td>{teacher.department}</td> */}
               <td>
                 <button
                   className="delete-btn"

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./StudentSignup.css";
-import { studentRegister } from "../../action/studentAction";
-import Slider from "../Slider/Slider";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { studentRegister } from "../../../action/studentAction";
+import Slider from "../../Slider/Slider";
 
 function StudentSignUp() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function StudentSignUp() {
   const [fullName, setfullName] = useState("");
   const [email, setEmail] = useState("");
   const [branch, setBranch] = useState("");
+  const [sectionName, setSectionName] = useState("");
   const [password, setPassword] = useState("");
   const [conformPassword, setconformPassword] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -31,6 +33,7 @@ function StudentSignUp() {
     myForm.append("fullName", fullName);
     myForm.append("email", email);
     myForm.append("branch", branch);
+    myForm.append("sectionName", sectionName);
     myForm.append("password", password);
     myForm.append("conformPassword", conformPassword);
     myForm.append("avatar", avatar);
@@ -44,6 +47,7 @@ function StudentSignUp() {
         setPassword("");
         setconformPassword("");
         setBranch("");
+        setSectionName("");
         setAvatar("");
         // setLoading(false); // Hide spinner after successful login
         navigate("/student/login");
@@ -100,15 +104,20 @@ function StudentSignUp() {
 
             <div className="form">
               <label htmlFor="branch">Branch:</label>
-              <input
-                type="branch"
-                id="branch"
-                placeholder="* Enter branch"
-                value={branch}
-                onChange={(e) => setBranch(e.target.value)}
-                required
-                className="input"
-              />
+              <select className="form-select" id="branch" onChange={(e) => setBranch(e.target.value)} >
+                <option selected>* Choose Branch</option>
+                <option value="CSE" >CSE</option>
+              </select>
+            </div>
+
+            <div className="form">
+              <label htmlFor="sectionName">Section:</label>
+              <select className="form-select" id="sectionName" onChange={(e) => setSectionName(e.target.value)}>
+                <option selected>* Choose Section</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
             </div>
 
             <div className="form">

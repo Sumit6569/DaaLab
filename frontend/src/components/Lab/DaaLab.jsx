@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import React from "react";
-import "./DaaLab.css";
-=======
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 function DaaLab() {
   const [activeUnit, setActiveUnit] = useState(null);
->>>>>>> a81c10471f47b8b928fa31fcd90249276ad54bc8
 
   const units = [
     {
