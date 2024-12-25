@@ -31,6 +31,7 @@ import LoginPage from "./components/LoginSignup/Helper/LoginPage.jsx";
 import AssignmentDetails from "./components/Assingment/AssignmentDetails.jsx";
 
 import {
+  getActivityDetails,
   getAssignmentDetails,
   getSectionDetails,
   getStudentWorkDetails,
@@ -50,6 +51,7 @@ function App() {
     dispatch(getAssignmentDetails());
     dispatch(getSectionDetails());
     dispatch(getStudentWorkDetails());
+    dispatch(getActivityDetails())
   }, [dispatch]);
 
   const { isAuthenticated } = useSelector((state) => ({
@@ -62,8 +64,9 @@ function App() {
   const { student} = useSelector((state) => state.student);
   const { studentDetails } = useSelector((state) => state.studentDetails)
   const { assignment } = useSelector((state) => state.assignment );
-  const {section } = useSelector((state) => state.section );
+  const { section } = useSelector((state) => state.section );
   const { studentWork } = useSelector((state) => state.studentWork );
+  const { activity } = useSelector((state) => state.activity );
 
   return (
     <>
@@ -84,7 +87,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard/student" element={isAuthenticated && userType === "student" ? <StudentDashboard student={student?.data} section={section?.data} assignment={assignment?.data} studentWork={studentWork?.data} /> : <StudentLogin />} />
           <Route path="/dashboard/teacher" element={isAuthenticated && userType === "teacher" ? <TeacherDashboard teacher={teacher?.data} section={section?.data} assignment={assignment?.data} studentWork={studentWork?.data} /> : <TeacherLogin />} />
-          <Route path="/dashboard/admin" element={isAuthenticated && userType === "admin" ? <AdminDashboard  teacher={teacher?.data} studentDetails={studentDetails?.data} teacherDetails={teacherDetails?.data} /> : <AdminLogin />} />
+          <Route path="/dashboard/admin" element={isAuthenticated && userType === "admin" ? <AdminDashboard  teacher={teacher?.data} studentDetails={studentDetails?.data} teacherDetails={teacherDetails?.data} activity={activity?.data} /> : <AdminLogin />} />
           <Route path="/daalab" element={<DaaLab />} />
           <Route path="/loginPage" element={<LoginPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />

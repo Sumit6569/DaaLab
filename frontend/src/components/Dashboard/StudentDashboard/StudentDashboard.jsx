@@ -30,33 +30,55 @@ function StudentDashboard({student={}, section=[], assignment=[], studentWork=[]
 
     const studentSection = sectionMap[student.sectionId]
 
-    // console.log("studentWork", studentWork);
+    console.log("studentWork", sectionMap);
     
-
+    // Assignments with section 
     const studentSectionAssignments = React.useMemo(() => {
       const studentSection = section.find((sec) => sec._id === student.sectionId);
+      
       return studentSection?.assignments || [];
     }, [section, student.sectionId]);
+
+    // No. of student in section
+    const studentInSection = React.useMemo(() => {
+      const studentSection = section.find((sec) => sec._id === student.sectionId);
+      
+      return studentSection.students.length;
+    }, [section, student.sectionId]);
     
+
     
     const sectionAssignments = React.useMemo(() => {
       // Filter assignments whose IDs are in studentSectionAssignments
       return assignment.filter((assign) => studentSectionAssignments.includes(assign._id));
     }, [assignment, studentSectionAssignments]);
     
-    // console.log("Assignments data of student's section:", studentSectionAssignments);
-    
+
     const studentWorkData = React.useMemo(() => {
       return studentWork.filter((work) => work.students === student._id)
     }, [studentWork, student._id])
 
-    // console.log("Student Work Data:", studentWorkData);
+
+
+    // console.log(sectionAssignments);
+    const pendingAssignmentsCount = React.useMemo(() => {
+      return sectionAssignments.filter((assignment) => {
+        // Find matching studentWork by checking nested assignments
+        const matchingStudentWork = studentWork.find((work) =>
+          work.assignments.some((assign) => assign._id === assignment._id) // Check if assignment ID matches
+        );
+    
+        // Count as pending if no work is submitted or status is "Pending"
+        return !matchingStudentWork || matchingStudentWork.status === "Pending";
+      }).length; // Get the count of pending assignments
+    }, [sectionAssignments, studentWork]);
 
     const handleSubmitAssignment = (assignmentId) => {
       navigate("/submitassingment", {
         state: { assignmentId: assignmentId },
       });
     };
+
 
     const handleAssignmentDetails = (assignmentDetails) => {
       const provider = student.provider
@@ -119,21 +141,21 @@ function StudentDashboard({student={}, section=[], assignment=[], studentWork=[]
           <div className="card completed-assignments">
             <CheckCircleIcon className="icon" />
             <div>
-              <p className="card-value">{sectionAssignments.length}</p>
+              <p className="card-value">{sectionAssignments.length-pendingAssignmentsCount}</p>
               <p className="card-label">Completed Assignments</p>
             </div>
           </div>
           <div className="card pending-assignments">
             <ExclamationCircleIcon className="icon" />
             <div>
-              <p className="card-value">2</p>
+              <p className="card-value">{pendingAssignmentsCount} </p>
               <p className="card-label">Pending Assignments</p>
             </div>
           </div>
           <div className="card classmates">
             <UserGroupIcon className="icon" />
             <div>
-              <p className="card-value">{studentSectionAssignments.length}</p>
+              <p className="card-value">{studentInSection}</p>
               <p className="card-label">Classmates</p>
             </div>
           </div>

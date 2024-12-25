@@ -28,6 +28,10 @@ import {
     GOOGLE_LOGIN_REQUEST,
     GOOGLE_LOGIN_SUCCESS,
     GOOGLE_LOGIN_FAIL,
+
+    DELETE_STUDENT_SUCCESS,
+    DELETE_STUDENT_REQUEST,
+    DELETE_STUDENT_FAIL,
  } from "../constrants/ATSConstrants";
 
 
@@ -208,3 +212,40 @@ export const googleLogin = (tokens) => async (dispatch) => {
       throw error;
   }
 };
+
+export const deleteStudent = (data) => async (dispatch) => {
+  
+    try {
+      dispatch({ type: DELETE_STUDENT_REQUEST });
+  
+      const accessToken = localStorage.getItem('accessToken') || Cookies.get('token');
+      if (!accessToken) {
+          throw new Error("Access token not found");
+      }
+  
+      const response = await api.post( "/students/deleteStudent",
+        data,
+          {
+              headers: {
+                  "Authorization": `Bearer ${accessToken}`,
+              },
+          }
+      );
+  
+      dispatch({
+          type: DELETE_STUDENT_SUCCESS,
+          payload: response.data,
+      });
+  
+      return response;
+  
+    } catch (error) {
+      console.error('Error during assignment deletion:', error.response?.data || error.message);
+      dispatch({
+          type: DELETE_STUDENT_FAIL,
+          payload: error.response?.data?.message || error.message,
+      });
+      throw error;
+    }
+  
+  };

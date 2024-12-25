@@ -94,16 +94,26 @@ body {
   text-align: left;
 }
 
+.activities-table .status {
+  margin: .7rem 0rem;
+}
 .activities-table tbody tr:nth-child(even) {
   background-color: #f7fafc;
 }
 
+.status {
+  /* margin-bottom: .5rem; */
+}
 .status.completed {
-  color: #38a169;
+  width: 100px;
+  background-color: green;
+  color: #ffffff;
 }
 
-.status.pending {
-  color: #d69e2e;
+.status.failed {
+  width: 100px;
+  background-color: rgb(207, 30, 30);
+  color: white;
 }
 .admin-details {
   background: linear-gradient(145deg, #ffffff, #edf2f7); /* Softer gradient */
