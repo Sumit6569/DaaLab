@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import  { studentDetailReducer, studentReducer } from "./reducer/studentReducer";
 import {teacherReducer, teacherDetailReducer} from "./reducer/teacherReducer"
-import { assignmentReducer, sectionReducer, studentWorkReducer,  } from "./reducer/assignmentReducer";
+import { activityReducer, assignmentReducer, sectionReducer, studentWorkReducer,  } from "./reducer/assignmentReducer";
 
 
 const store = configureStore ({
@@ -13,6 +13,7 @@ const store = configureStore ({
         assignment: assignmentReducer,
         section: sectionReducer,
         studentWork: studentWorkReducer,
+        activity: activityReducer,
     }
 })
 

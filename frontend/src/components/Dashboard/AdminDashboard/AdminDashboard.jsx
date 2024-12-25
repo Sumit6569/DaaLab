@@ -8,28 +8,7 @@ import "./AdminDashboard.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const recentActivities = [
-  {
-    id: 1,
-    title: "Added New Teacher: John Doe",
-    date: "2023-12-01",
-    status: "Completed",
-  },
-  {
-    id: 2,
-    title: "Reviewed Student Feedback",
-    date: "2023-12-05",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    title: "Published New Course: React Basics",
-    date: "2023-12-10",
-    status: "Completed",
-  },
-];
-
-function AdminDashboard({teacher={}, studentDetails=[], teacherDetails=[]}) {
+function AdminDashboard({teacher={}, studentDetails=[], teacherDetails=[], activity=[]}) {
   const [loader, setLoader] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
@@ -111,14 +90,21 @@ function AdminDashboard({teacher={}, studentDetails=[], teacherDetails=[]}) {
               <tr>
                 <th>Activity</th>
                 <th>Date</th>
+                <th>Reason</th>
+                <th>ID</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {recentActivities.map((activity) => (
+            {activity
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by date (optional)
+              .slice(0, 10) // Take the first 10 most recent items
+              .map((activity) => (
                 <tr key={activity.id}>
-                  <td>{activity.title}</td>
-                  <td>{activity.date}</td>
+                  <td><b>{activity.title}</b></td>
+                  <td>{activity.createdAt.split('T')[0]}</td>
+                  <td>{activity.reason}</td>
+                  <td>{activity.userId}</td>
                   <td className={`status ${activity.status.toLowerCase()}`}>
                     {activity.status}
                   </td>
@@ -150,6 +136,13 @@ AdminDashboard.propTypes = {
     })
   ),
   teacherDetails: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      sectionId: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+  activity: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string,

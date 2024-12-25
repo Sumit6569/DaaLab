@@ -7,19 +7,27 @@ import {
   GET_TEACHER_REQUEST,
   GET_TEACHER_SUCCESS,
   GET_TEACHER_FAIL,
+
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
+
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+
   LOAD_TEACHER_REQUEST,
   LOAD_TEACHER_SUCCESS,
   LOAD_TEACHER_FAIL,
+
   FORGOTPASSWORD_REQUEST,
   FORGOTPASSWORD_SUCCESS,
   FORGOTPASSWORD_FAIL,
+  DELETE_TEACHER_REQUEST,
+  DELETE_TEACHER_SUCCESS,
+  DELETE_TEACHER_FAIL,
+
 } from "../constrants/ATSConstrants";
 
 export const getTeacherDetails = () => async (dispatch) => {
@@ -220,5 +228,42 @@ export const loadTeachers = () => async (dispatch) => {
       payload: error.response?.data?.message || error.message,
     });
   }
+};
+
+export const deleteTeacher = (data) => async (dispatch) => {
+  
+  try {
+    dispatch({ type: DELETE_TEACHER_REQUEST });
+
+    const accessToken = localStorage.getItem('accessToken') || Cookies.get('token');
+    if (!accessToken) {
+        throw new Error("Access token not found");
+    }
+
+    const response = await api.post( "/teachers/deleteTeacher",
+      data,
+        {
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+            },
+        }
+    );
+
+    dispatch({
+        type: DELETE_TEACHER_SUCCESS,
+        payload: response.data,
+    });
+
+    return response;
+
+  } catch (error) {
+    console.error('Error during assignment deletion:', error.response?.data || error.message);
+    dispatch({
+        type: DELETE_TEACHER_FAIL,
+        payload: error.response?.data?.message || error.message,
+    });
+    throw error;
+  }
+
 };
 

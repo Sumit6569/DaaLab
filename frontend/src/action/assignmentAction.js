@@ -9,6 +9,9 @@ import {
     DELETE_ASSIGNMENT_FAIL,
     DELETE_ASSIGNMENT_REQUEST,
     DELETE_ASSIGNMENT_SUCCESS,
+    GET_ACTIVITY_FAIL,
+    GET_ACTIVITY_REQUEST,
+    GET_ACTIVITY_SUCCESS,
     GET_ASSIGNMENT_FAIL,
     GET_ASSIGNMENT_REQUEST,
     GET_ASSIGNMENT_SUCCESS,
@@ -187,7 +190,7 @@ export const deleteAssignment = (data) => async (dispatch) => {
         throw new Error("Access token not found");
     }
 
-    const response = await api.post( "/teachers/deleteAssignment",
+    const response = await api.post( "/assignments/deleteAssignment",
       data,
         {
             headers: {
@@ -212,4 +215,25 @@ export const deleteAssignment = (data) => async (dispatch) => {
     throw error;
   }
 
+};
+
+export const getActivityDetails = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_ACTIVITY_REQUEST });
+
+    const {data} = await api.get("assignments/getActivityDetails"); // Adjust the endpoint if necessary
+    
+    dispatch({
+      type: GET_ACTIVITY_SUCCESS,
+      payload: data,
+    });
+
+  } catch (error) {
+    console.log("error");
+    
+    dispatch({
+      type: GET_ACTIVITY_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
 };
